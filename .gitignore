@@ -1,0 +1,5 @@
+.DS_Store
+_work/
+*.local.md
+.venv/
+__pycache__/

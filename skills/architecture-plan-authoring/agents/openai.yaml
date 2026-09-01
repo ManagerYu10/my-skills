@@ -1,0 +1,4 @@
+interface:
+  display_name: "架构规划写作"
+  short_description: "以图为表达骨架，把复杂技术材料写成可讲、可协作、可说服团队的架构提案"
+  default_prompt: "Use $architecture-plan-authoring to turn these technical materials into an audience-facing architecture proposal."

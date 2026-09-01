@@ -1,0 +1,7 @@
+interface:
+  display_name: "Weekly Review Authoring"
+  short_description: "核对本地工作证据，起草可复核且可转化为简历材料的六模块周报"
+  default_prompt: "使用 $weekly-review-authoring 核对我本周的实际工作，并起草一份先供我 Review 的周报。"
+
+policy:
+  allow_implicit_invocation: true
