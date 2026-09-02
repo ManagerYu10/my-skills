@@ -1,0 +1,7 @@
+interface:
+  display_name: "认识自己的两场访谈"
+  short_description: "天赋挖掘往回看找底层天赋，人生设计往前看给三个五年版本和原型行动"
+  default_prompt: "使用 $self-understanding-interview 对我做一次深度访谈，先告诉我流程和大概要多久。"
+
+policy:
+  allow_implicit_invocation: true

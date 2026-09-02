@@ -1,0 +1,7 @@
+interface:
+  display_name: "陌生领域学习"
+  short_description: "按需求选定双层解释、反向拆解、横纵分析或事实核查，产出可检验的学习结果"
+  default_prompt: "使用 $unfamiliar-topic-learning 帮我搞懂这个东西，先判断该用哪种方法。"
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,7 @@
+interface:
+  display_name: "解决问题的三种视角"
+  short_description: "专家会诊、第一性原理、跨领域借解：先换视角再给方案"
+  default_prompt: "使用 $problem-solving-lenses 帮我换个视角看这个问题，先判断该用哪一种。"
+
+policy:
+  allow_implicit_invocation: true

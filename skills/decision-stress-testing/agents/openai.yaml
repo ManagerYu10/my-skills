@@ -1,0 +1,7 @@
+interface:
+  display_name: "决策压力测试"
+  short_description: "双向钢人论证把两边论证到最强；推演失效时改用最小实验取现实数据"
+  default_prompt: "使用 $decision-stress-testing 帮我压力测试这个决定，先把两边都论证到最强。"
+
+policy:
+  allow_implicit_invocation: true

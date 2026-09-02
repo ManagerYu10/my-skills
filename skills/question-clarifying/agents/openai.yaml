@@ -1,0 +1,7 @@
+interface:
+  display_name: "问清问题"
+  short_description: "用苏格拉底式问诊把模糊困惑收敛成一个准确、值得回答的问题"
+  default_prompt: "使用 $question-clarifying 对我这段困惑做一次问诊，先别给建议。"
+
+policy:
+  allow_implicit_invocation: true

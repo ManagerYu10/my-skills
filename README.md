@@ -1,6 +1,6 @@
 # my-skills
 
-个人 Agent Skill 仓库，沉淀反复用得上的写作与协作技能。每个技能是一个自包含目录，
+个人 Agent Skill 仓库，沉淀反复用得上的写作、思考与协作技能。每个技能是一个自包含目录，
 放 `SKILL.md`（指令与元数据）加可选的 `references/`（按需加载的长参考）。
 
 同一份 `SKILL.md` 同时供 Claude Code 和 Codex 使用；`agents/openai.yaml` 只是 Codex 侧的
@@ -8,12 +8,26 @@
 
 ## 技能索引
 
+### 写作
+
 | # | 技能 | 做什么 | 什么时候触发 | 参考文件 |
 | --- | --- | --- | --- | --- |
 | 1 | [weekly-review-authoring](skills/weekly-review-authoring/SKILL.md) | 先建证据清单再写周报，把周报写成职业证据而不是活动流水账 | 写周报、整理本周进展、Review 周报草稿 | [写作标准](skills/weekly-review-authoring/references/weekly-review-standard.md) |
 | 2 | [architecture-plan-authoring](skills/architecture-plan-authoring/SKILL.md) | 按讲述时长冻结正文预算，先串文字主线再用图压缩表达 | 架构规划、技术规划、方案汇报、路线提案 | [交付物模式](skills/architecture-plan-authoring/references/deliverable-modes.md)、[审查量表](skills/architecture-plan-authoring/references/review-rubric.md) |
 
-## 两个技能的分工
+### 思考
+
+| # | 技能 | 做什么 | 什么时候触发 | 参考文件 |
+| --- | --- | --- | --- | --- |
+| 3 | [question-clarifying](skills/question-clarifying/SKILL.md) | 用苏格拉底式问诊把模糊困惑收敛成一个准确、值得回答的问题 | 说不清自己想问什么、问题描述发散、要求先别给建议 | [复制版模板](skills/question-clarifying/references/prompt-template.md) |
+| 4 | [unfamiliar-topic-learning](skills/unfamiliar-topic-learning/SKILL.md) | 按需求选定双层解释、反向拆解、横纵分析或事实核查 | 听不懂某个概念、想拆解好范例、想系统研究一个领域、怀疑一份材料 | [四种方法模板](skills/unfamiliar-topic-learning/references/prompt-templates.md) |
+| 5 | [problem-solving-lenses](skills/problem-solving-lenses/SKILL.md) | 先换视角再给方案：专家会诊、第一性原理、跨领域借解 | 方案越修越复杂、问题跨多个专业、本行业解法都试过无效 | [三种视角模板](skills/problem-solving-lenses/references/prompt-templates.md) |
+| 6 | [decision-stress-testing](skills/decision-stress-testing/SKILL.md) | 把两个选项都论证到最强；推演失效时改用最小实验取现实数据 | 两条路都有道理、反复权衡拿不定主意、想验证一个想法值不值得做 | [两个方法模板](skills/decision-stress-testing/references/prompt-templates.md) |
+| 7 | [self-understanding-interview](skills/self-understanding-interview/SKILL.md) | 深度访谈：往回看找底层天赋，往前看给三个五年版本和原型行动 | 想搞清自己擅长什么、怀疑自己没天赋、在考虑职业或人生方向转变 | [天赋挖掘](skills/self-understanding-interview/references/talent-discovery.md)、[人生设计](skills/self-understanding-interview/references/life-design.md) |
+
+## 技能之间的分工
+
+### 两个写作技能
 
 都是写作技能，但解决的问题不同，不要混用：
 
@@ -22,9 +36,29 @@
 - **架构规划**面向听众。核心是一条能被口头复述的因果链，
   正文长度由有效讲述时长反推，验收标准是「讲述者能不能脱稿复述主线并回答质疑」。
 
-两者共享一条纪律：**不把未验证的判断写成事实**。周报里体现为区分已验证事实、
-本人判断和待验证假设；架构规划里体现为「零上下文读者测试」——
-隐藏聊天记录和作者解释，只让审阅者读当前正文。
+### 五个思考技能
+
+按“问题处在哪一步”分工，串起来是一条从困惑到行动的链，单个也能独立用：
+
+| 处境 | 用哪个 |
+| --- | --- |
+| 还说不清要问什么 | `question-clarifying` |
+| 知道要问什么，但不懂 | `unfamiliar-topic-learning` |
+| 懂了，但方案想不出来或想不好 | `problem-solving-lenses` |
+| 方案有两个，选不出来 | `decision-stress-testing` |
+| 卡的其实不是这件事，是方向 | `self-understanding-interview` |
+
+最容易混的是前两个和第四个：`question-clarifying` 是**还没有答案**时把问题问对，
+`decision-stress-testing` 是**已有两个答案**时选一个，底层目的不同，不要互相替代。
+
+## 共享的一条纪律
+
+**不把未验证的判断写成事实。**
+
+- 周报里体现为区分已验证事实、本人判断和待验证假设；
+- 架构规划里体现为「零上下文读者测试」——隐藏聊天记录和作者解释，只让审阅者读当前正文；
+- 五个思考技能里体现为事实、推断、观点分开写，证据不足时写「暂未核实」，
+  以及所有关于用户本人的判断都必须对应他讲过的具体经历。
 
 ## 安装
 
@@ -34,25 +68,33 @@
 git clone https://github.com/ManagerYu10/my-skills.git
 cd my-skills
 
-# Claude Code（用户级）
-ln -s "$PWD/skills/weekly-review-authoring"     ~/.claude/skills/
-ln -s "$PWD/skills/architecture-plan-authoring" ~/.claude/skills/
+# Claude Code（用户级）：按需挑，或者全装
+for s in skills/*/; do ln -s "$PWD/$s" ~/.claude/skills/; done
 
 # Codex
-ln -s "$PWD/skills/weekly-review-authoring"     ~/.codex/skills/
-ln -s "$PWD/skills/architecture-plan-authoring" ~/.codex/skills/
+for s in skills/*/; do ln -s "$PWD/$s" ~/.codex/skills/; done
 ```
 
-只装某一个就只链那一行。项目级安装把链接放进 `<repo>/.claude/skills/` 即可。
+只装某一个就单独链那一个目录，例如：
+
+```bash
+ln -s "$PWD/skills/decision-stress-testing" ~/.claude/skills/
+```
+
+项目级安装把链接放进 `<repo>/.claude/skills/` 即可。
 
 ## 来源与边界
 
-- 两个技能均由本人编写。公开前做过脱敏：去掉了真实姓名、本机绝对路径和内部项目代号。
+- 两个写作技能（`weekly-review-authoring`、`architecture-plan-authoring`）由本人编写。
+  公开前做过脱敏：去掉了真实姓名、本机绝对路径和内部项目代号。方法论部分未做删减。
+- 五个思考技能改编自一篇公开发表的公众号文章里的 12 个提示词，**不是本人原创方法**。
+  每个技能目录下的 `UPSTREAM.md` 写明了出处、取得日期、本地改了什么，
+  以及上游许可证状态（原文未声明授权条款，状态为不确定）。使用前请先读该文件。
 - 周报的六模块字段名和架构规划的三色配色**保留为默认模板**，
   都可以整体替换成你所在组织的字段和品牌色；替换字段不影响其余写作标准。
-- 方法论部分未做删减。
 - 这些技能是按本人的工作场景打磨的，不是通用最佳实践。直接套用前先看它假设了什么。
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE) —— 覆盖本仓库本地编写的内容。改编自第三方材料的技能另见其目录下的
+`UPSTREAM.md`，MIT 不代表已获得上游的再许可授权。
