@@ -13,8 +13,6 @@ description: "将已有的实习、转正或晋升材料组织成可讲述的工
 - 用户要求完整汇报骨架、45 分钟时间分配或可直接填写的 Markdown 时，读取 [45 分钟实习汇报模板](references/45-minute-internship-report-template.md)。
 - 用户需要判断每层的含义、证据标准或如何从低层升级时，读取 [五层汇报框架](references/five-level-reporting.md)。
 
-输入是小红书网页、图片、长图或截图而非可编辑文字时，先使用 `xiaohongshu-content-extraction` 获取可核对的转写稿；本 Skill 不负责页面读取或 OCR。
-
 ## 用五层框架升级汇报
 
 先保留材料中已证实的事实，再向上组织叙事；不要为了显得“层级高”而虚构全局判断或业务价值。
