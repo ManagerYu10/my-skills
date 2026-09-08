@@ -14,6 +14,13 @@
 | --- | --- | --- | --- | --- |
 | 1 | [weekly-review-authoring](skills/weekly-review-authoring/SKILL.md) | 先建证据清单再写周报，把周报写成职业证据而不是活动流水账 | 写周报、整理本周进展、Review 周报草稿 | [写作标准](skills/weekly-review-authoring/references/weekly-review-standard.md) |
 | 2 | [architecture-plan-authoring](skills/architecture-plan-authoring/SKILL.md) | 按讲述时长冻结正文预算，先串文字主线再用图压缩表达 | 架构规划、技术规划、方案汇报、路线提案 | [交付物模式](skills/architecture-plan-authoring/references/deliverable-modes.md)、[审查量表](skills/architecture-plan-authoring/references/review-rubric.md) |
+| 3 | [internship-reporting](skills/internship-reporting/SKILL.md) | 按五层框架将已有材料组织为实习 / 转正汇报 | 实习总结、转正汇报、晋升材料、45 分钟汇报模板 | [五层框架](skills/internship-reporting/references/five-level-reporting.md)、[45 分钟模板](skills/internship-reporting/references/45-minute-internship-report-template.md) |
+
+### 内容提取
+
+| # | 技能 | 做什么 | 什么时候触发 | 参考文件 |
+| --- | --- | --- | --- | --- |
+| 4 | [xiaohongshu-content-extraction](skills/xiaohongshu-content-extraction/SKILL.md) | 将公开小红书笔记、长图或截图转成带来源边界的可编辑 Markdown | 给出小红书链接、长图或截图，要求提取原文、OCR 或转写 | — |
 
 ### 思考
 
@@ -27,7 +34,7 @@
 
 ## 技能之间的分工
 
-### 两个写作技能
+### 三个写作技能
 
 都是写作技能，但解决的问题不同，不要混用：
 
@@ -35,6 +42,12 @@
   验收标准是「离职后这条能不能不重新考古就写进简历」。
 - **架构规划**面向听众。核心是一条能被口头复述的因果链，
   正文长度由有效讲述时长反推，验收标准是「讲述者能不能脱稿复述主线并回答质疑」。
+- **实习汇报**面向实习总结、转正或晋升场景。核心是把项目从工作交付逐步组织为方法、全局判断、角色定位和可信的增量价值；验收标准是「听众能说出共同主线、个人贡献和下一步」。
+
+### 小红书图文转写与实习汇报
+
+- **小红书图文转写**只负责忠实提取公开笔记的正文和图片文字，并标明来源与不确定处；它不改写观点，也不生成汇报。
+- **实习汇报**只接受已有的可编辑材料，负责形成汇报故事、五层诊断和模板；原始小红书图文应先由“小红书图文转写”转为材料，再交给它。
 
 ### 五个思考技能
 

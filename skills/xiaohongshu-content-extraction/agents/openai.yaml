@@ -1,0 +1,4 @@
+interface:
+  display_name: "小红书图文转写"
+  short_description: "将小红书图文和长图转成可编辑文字"
+  default_prompt: "Use $xiaohongshu-content-extraction to extract this Xiaohongshu note into Markdown."
