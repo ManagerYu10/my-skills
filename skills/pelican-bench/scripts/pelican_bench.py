@@ -15,6 +15,7 @@
     pelican_bench.py --config PATH   指定泳道配置（默认 ~/.config/pelican-bench/lanes.env）
     pelican_bench.py --out DIR       指定快照与看板目录（默认 ~/.local/share/pelican-bench）
     pelican_bench.py --keep N        保留最近 N 轮（默认 3）
+    pelican_bench.py --anonymize     看板里把通道名抹成「中转 A/B」，便于截图外发
 """
 import concurrent.futures as cf
 import html
@@ -357,6 +358,25 @@ def prune():
         shutil.rmtree(old, ignore_errors=True)
 
 
+ANON = False  # --anonymize：出图给外人看时把通道名抹成「中转 A/B」，别点名服务商
+
+
+def anon_channels(runs):
+    """把各条通道的显示名映射成匿名标签；直连保留，其余按首次出现编号。"""
+    mapping, nth = {}, 0
+    for run in runs:
+        for rec in run["lanes"]:
+            ch = rec.get("channel") or ""
+            if ch in mapping:
+                continue
+            if "直连" in ch or "direct" in ch.lower():
+                mapping[ch] = "官方直连"
+            else:
+                mapping[ch] = f"中转 {chr(ord('A') + nth)}"
+                nth += 1
+    return mapping
+
+
 def load_runs():
     out = []
     for d in sorted((d for d in RUNS.iterdir() if d.is_dir()), reverse=True)[:KEEP]:
@@ -386,6 +406,11 @@ def render():
     runs = load_runs()
     if not runs:
         return
+    if ANON:
+        mapping = anon_channels(runs)
+        for run in runs:
+            for rec in run["lanes"]:
+                rec["channel"] = mapping.get(rec.get("channel") or "", "中转")
     by_run = [{rec["key"]: rec for rec in r["lanes"]} for r in runs]
     keys = []
     for m in by_run:
@@ -429,9 +454,7 @@ code{{background:#eef2f6;padding:1px 5px;border-radius:3px}}
 if __name__ == "__main__":
     ARGS = apply_cli(sys.argv[1:])
     OPEN_AFTER = "--open" in ARGS
-    if not ENV_FILE.is_file():
-        sys.exit(f"没有泳道配置 {ENV_FILE}\n"
-                 f"照着 lanes.env.example 建一份，权限设 600（里面是密钥）。")
+    ANON = "--anonymize" in ARGS
     RUNS.mkdir(parents=True, exist_ok=True)
 
     def show():
@@ -449,6 +472,10 @@ if __name__ == "__main__":
         render()
         show()
         sys.exit()
+    if not ENV_FILE.is_file():
+        sys.exit(f"没有泳道配置 {ENV_FILE}\n"
+                 f"照着 lanes.env.example 建一份，权限设 600（里面是密钥）。\n"
+                 f"只想用已有快照重出看板的话加 render。")
     # 上一轮没跑完就别叠上来
     try:
         fd = os.open(LOCK, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
