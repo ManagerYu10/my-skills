@@ -406,6 +406,7 @@ def render():
     runs = load_runs()
     if not runs:
         return
+    runs.reverse()  # load_runs 给的是新到旧；看板按时间从左往右排
     if ANON:
         mapping = anon_channels(runs)
         for run in runs:
@@ -444,7 +445,7 @@ td.miss{{color:#b7c0c9}}
 code{{background:#eef2f6;padding:1px 5px;border-radius:3px}}
 </style>
 <h1>鹈鹕骑自行车 · 四家模型横评</h1>
-<p class="sub">每 30 分钟一轮，保留最近 {KEEP} 次，最新在左；页面每 2 分钟自刷新。
+<p class="sub">每 30 分钟一轮，保留最近 {KEEP} 次，由旧到新从左往右；页面每 2 分钟自刷新。
 同一句 <code>{html.escape(PROMPT.split(".")[0])}</code>，同样 {MAX_TOKENS} max_tokens，
 全部流式。时间为北京时间。「首字」是第一个正文字符，思考时长不计在内。</p>
 <table><thead><tr><th>模型 / 通道</th>{heads}</tr></thead><tbody>{''.join(rows)}</tbody></table>
