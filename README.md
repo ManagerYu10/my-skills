@@ -22,6 +22,12 @@
 | --- | --- | --- | --- | --- |
 | 4 | [xiaohongshu-content-extraction](skills/xiaohongshu-content-extraction/SKILL.md) | 将公开小红书笔记、长图或截图转成带来源边界的可编辑 Markdown | 给出小红书链接、长图或截图，要求提取原文、OCR 或转写 | — |
 
+### 工程诊断
+
+| # | 技能 | 做什么 | 什么时候触发 | 参考文件 |
+| --- | --- | --- | --- | --- |
+| 5 | [pelican-bench](skills/pelican-bench/SKILL.md) | 让多条「模型 x 通道」画同一张鹈鹕骑自行车 SVG 并出并排看板，同时量出 input token 注入与思考 token 抑制 | 怀疑 API 中转层降级、偷塞隐藏 system prompt 或关掉思考；横评几家模型的出图能力 | [原始数据说明](skills/pelican-bench/references/raw-data.md) |
+
 ### 思考
 
 | # | 技能 | 做什么 | 什么时候触发 | 参考文件 |
@@ -103,6 +109,9 @@ ln -s "$PWD/skills/decision-stress-testing" ~/.claude/skills/
 - 五个思考技能改编自一篇公开发表的公众号文章里的 12 个提示词，**不是本人原创方法**。
   每个技能目录下的 `UPSTREAM.md` 写明了出处、取得日期、本地改了什么，
   以及上游许可证状态（原文未声明授权条款，状态为不确定）。使用前请先读该文件。
+- `pelican-bench` 由本人编写。所用题面「Generate an SVG of a pelican riding a bicycle」
+  是 Simon Willison 2024 年起的公开非正式基准，本技能沿用原版措辞以保持与公开对比图可比。
+  脚本只用 Python 标准库；泳道配置含密钥，放在仓库外的 `~/.config/` 下，仓库内只有样例。
 - 周报的六模块字段名和架构规划的三色配色**保留为默认模板**，
   都可以整体替换成你所在组织的字段和品牌色；替换字段不影响其余写作标准。
 - 这些技能是按本人的工作场景打磨的，不是通用最佳实践。直接套用前先看它假设了什么。
