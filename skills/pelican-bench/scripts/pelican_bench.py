@@ -113,9 +113,22 @@ def join(base, suffix):
     return f"{base}/{suffix}"
 
 
-# 泳道名与看板行序；跟 lanes.env 里的 PB_<名>_* 对应。加泳道就往这里加名字。
-LANE_ORDER = ("OPENAI_DIRECT", "OPENAI_RELAY",
-              "ANTHROPIC_DIRECT", "ANTHROPIC_RELAY")
+# 泳道名和行序都从配置里推，不写死在代码里 ——
+# 加一条泳道只改配置文件，脚本不动，这样同一份脚本能服务多套配置。
+LANE_NAME_RE = re.compile(r"^PB_(.+)_BASE_URL$")
+
+
+def lane_order(E):
+    """显式 PB_LANE_ORDER 优先；否则按配置文件里 BASE_URL 出现的先后排。"""
+    explicit = E.get("PB_LANE_ORDER", "").strip()
+    if explicit:
+        return tuple(s.strip() for s in explicit.split(",") if s.strip())
+    out = []
+    for key in E:
+        m = LANE_NAME_RE.match(key)
+        if m and m.group(1) not in out:
+            out.append(m.group(1))
+    return tuple(out)
 
 
 def join(base, suffix):
@@ -130,7 +143,7 @@ def join(base, suffix):
 def lanes(E):
     """泳道全部由 lanes.env 里的 PB_<名>_* 描述，换模型换通道只改那个文件，不动代码。"""
     out = []
-    for slot in LANE_ORDER:
+    for slot in lane_order(E):
         def g(k, d=None, _s=slot):
             return E.get(f"PB_{_s}_{k}", d)
         base, api_key, model = g("BASE_URL"), g("API_KEY"), g("MODEL")
