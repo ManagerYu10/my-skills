@@ -1,4 +1,4 @@
-# my-skills
+# manager-zhang-skills
 
 个人 Agent Skill 仓库，沉淀反复用得上的写作、思考与协作技能。每个技能是一个自包含目录，
 放 `SKILL.md`（指令与元数据）加可选的 `references/`（按需加载的长参考）。
@@ -26,7 +26,7 @@
 
 | # | 技能 | 做什么 | 什么时候触发 | 参考文件 |
 | --- | --- | --- | --- | --- |
-| 5 | [pelican-bench](skills/pelican-bench/SKILL.md) | 让多条「模型 x 通道」画同一张鹈鹕骑自行车 SVG 并出并排看板，同时量出 input token 注入与思考 token 抑制 | 怀疑 API 中转层降级、偷塞隐藏 system prompt 或关掉思考；横评几家模型的出图能力 | [原始数据说明](skills/pelican-bench/references/raw-data.md) |
+| 5 | [pelican-proxy-check](https://github.com/ManagerZhang10/pelican-proxy-check) ↗ | 让多条「模型 x 通道」画同一张鹈鹕骑自行车 SVG 并出并排看板，同时量出 input token 注入与思考 token 抑制 | 怀疑 API 中转层降级、偷塞隐藏 system prompt 或关掉思考；横评几家模型的出图能力 | **住在独立仓库**，装法见该仓库 README |
 
 ### 思考
 
@@ -84,8 +84,8 @@
 技能目录直接软链或复制到 Agent 的技能目录即可，不需要构建步骤。
 
 ```bash
-git clone https://github.com/ManagerYu10/my-skills.git
-cd my-skills
+git clone https://github.com/ManagerZhang10/manager-zhang-skills.git
+cd manager-zhang-skills
 
 # Claude Code（用户级）：按需挑，或者全装
 for s in skills/*/; do ln -s "$PWD/$s" ~/.claude/skills/; done
@@ -109,9 +109,12 @@ ln -s "$PWD/skills/decision-stress-testing" ~/.claude/skills/
 - 五个思考技能改编自一篇公开发表的公众号文章里的 12 个提示词，**不是本人原创方法**。
   每个技能目录下的 `UPSTREAM.md` 写明了出处、取得日期、本地改了什么，
   以及上游许可证状态（原文未声明授权条款，状态为不确定）。使用前请先读该文件。
-- `pelican-bench` 由本人编写。所用题面「Generate an SVG of a pelican riding a bicycle」
-  是 Simon Willison 2024 年起的公开非正式基准，本技能沿用原版措辞以保持与公开对比图可比。
-  脚本只用 Python 标准库；泳道配置含密钥，放在仓库外的 `~/.config/` 下，仓库内只有样例。
+- `pelican-proxy-check` 由本人编写，**已拆成独立仓库**
+  [ManagerZhang10/pelican-proxy-check](https://github.com/ManagerZhang10/pelican-proxy-check)，
+  这里不再保留副本（一份代码两个地方维护迟早不同步）。所用题面
+  「Generate an SVG of a pelican riding a bicycle」是 Simon Willison 2024 年起的公开非正式基准，
+  沿用原版措辞以保持与公开对比图可比。脚本只用 Python 标准库；泳道配置含密钥，
+  放在仓库外的 `~/.config/` 下，仓库内只有样例。
 - 周报的六模块字段名和架构规划的三色配色**保留为默认模板**，
   都可以整体替换成你所在组织的字段和品牌色；替换字段不影响其余写作标准。
 - 这些技能是按本人的工作场景打磨的，不是通用最佳实践。直接套用前先看它假设了什么。

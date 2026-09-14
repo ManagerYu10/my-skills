@@ -1,7 +1,0 @@
-interface:
-  display_name: "鹈鹕横评"
-  short_description: "同题画鹈鹕横评多条模型通道，并量出 input token 注入与思考抑制"
-  default_prompt: "使用 $pelican-bench 跑一轮，把各通道的入 token 差和思考 token 列出来。"
-
-policy:
-  allow_implicit_invocation: true
